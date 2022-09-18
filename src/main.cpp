@@ -12,7 +12,7 @@
 uint8_t ledArray[] = {LED5, LED1, LED2, LED4, LED3};
 
 #define SLOW_BLINK 800 // ms
-#define FAST_BLINK 60  // ms
+#define FAST_BLINK 20  // ms
 #define LOW_TEMP 70.0
 #define HIGH_TEMP 90.0
 
@@ -75,6 +75,8 @@ void loop()
   float temperature = sensors.getTempFByIndex(0);
   Serial.print(F("Temperature: "));
   Serial.println(temperature);
+  if (temperature > HIGH_TEMP)
+    temperature = HIGH_TEMP; 
   // adjust link blink delay
   unsigned long newInterval = long((slope * temperature + offset) * 1000);
   Serial.print(F("New Interval: "));
